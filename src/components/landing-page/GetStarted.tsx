@@ -1,4 +1,4 @@
-import chart from "../../public/chart.png";
+import chart from "../../../public/chart.png";
 import Image from "next/image";
 
 export default function GetStarted() {
