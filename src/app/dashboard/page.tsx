@@ -8,7 +8,7 @@ export default function Dashboard() {
             <Navbar />
             <main>
                 <Hero />
-                <LinkTable />
+                {/* <LinkTable /> */}
             </main>
         </div>
     );

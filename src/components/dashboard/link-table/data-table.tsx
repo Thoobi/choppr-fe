@@ -4,6 +4,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table"
 
@@ -29,17 +30,19 @@ export function DataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
   })
 
+  
   return (
     <div className=" text-white">
       <Table>
-        <TableHeader className="bg-[#181E29]  h-[63px]">
+        <TableHeader className="bg-[#181E29] hover:bg-[#181E29] h-[63px]">
           {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
+            <TableRow key={headerGroup.id} className="hover:bg-[#181E29]">
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead className="w-[600px]" key={header.id}>
+                  <TableHead className="w-[600px] hover:bg-[#181E29]" key={header.id}>
                     {header.isPlaceholder
                       ? null
                       : flexRender(

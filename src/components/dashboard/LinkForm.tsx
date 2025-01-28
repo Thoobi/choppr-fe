@@ -63,6 +63,7 @@ export const LinkForm = () => {
                                     <Input placeholder="Enter the link here" {...field} className="border-4 border-[#353C4A] py-[21px] px-[25px] pl-[60px] text-[16px]/[28px] h-full rounded-[48px]" />
                                 </FormControl>
                                 <FormMessage />
+                                {shortUrl}
                             </FormItem>
                         )}
                     />

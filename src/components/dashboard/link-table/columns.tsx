@@ -21,10 +21,13 @@ export const columns: ColumnDef<Url>[] = [
   {
     accessorKey: "longURL",
     header: "Long Url",
+    enableResizing: true,
+    size: 10
   },
   {
     accessorKey: "shortURL",
     header: "Short Url",
+    size: 20
   },
   {
     accessorKey: "shortkey",
