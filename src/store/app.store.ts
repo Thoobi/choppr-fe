@@ -4,3 +4,8 @@ export const useLinkTableStore = create<{ loadingTable: boolean; setLoadingTable
     loadingTable: false,
     setLoadingTable: (loadingTable: boolean) => set({ loadingTable })
 }))
+
+export const useHeroStore = create<{ isEnabled: boolean; setIsEnabled: (isEnabled: boolean) => void }>((set) => ({
+    isEnabled: false,
+    setIsEnabled: (isEnabled: boolean) => set({ isEnabled })
+}))

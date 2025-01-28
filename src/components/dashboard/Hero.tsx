@@ -1,6 +1,5 @@
 "use client"
 import ToggleSwitch from "../ui/ToggleSwitch";
-import { useState } from "react";
 import { FaRegCircleQuestion } from "react-icons/fa6";
 import {
     Tooltip,
@@ -9,10 +8,11 @@ import {
     TooltipTrigger,
   } from "@/components/ui/tooltip"
 import { LinkForm } from "./LinkForm";
+import { useHeroStore } from "@/store/app.store";
 
 export const Hero = () => {
     
-    const [isEnabled, setIsEnabled] = useState()
+    const {isEnabled, setIsEnabled} = useHeroStore()
     return (
         <div className="mx-auto w-fit mt-[130px]">
             <h1 className="bg-[radial-gradient(#EB568E_0%,#144EE3_100%)] bg-clip-text text-transparent text-[60px]/[80px] font-extrabold">Shorten Your Loooong Links :&#41;</h1>
@@ -21,7 +21,11 @@ export const Hero = () => {
             <LinkForm />
 
             <ToggleSwitch isEnabled={isEnabled} onToggle={setIsEnabled} label="Auto Paste from Clipboard " />
-            <div className="flex items-center gap-2 justify-center mb-10">
+            {
+                localStorage.getItem("ctn") ? (
+                    <div></div>
+                ) : (
+                    <div className="flex items-center gap-2 justify-center mb-10">
                 <p className="font-light text-[14px] text-[#C9CED6] text-center">You can create <span className="text-[#EB568E] font-bold">05</span> more links. Register  Now to enjoy Unlimited usage</p>
                 <TooltipProvider>
                     <Tooltip>
@@ -34,6 +38,9 @@ export const Hero = () => {
                     </Tooltip>
                 </TooltipProvider>
             </div>
+                )
+            }
+            
         </div>
     );
 }

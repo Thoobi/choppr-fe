@@ -16,10 +16,13 @@ import { useUrlStore } from "@/store/url.store";
 import { ShortenUrlService } from "@/services/shorten-url.services";
 import { toast } from "@/hooks/use-toast";
 import { LoaderIcon } from "lucide-react";
+import { useAuthStore } from "@/store/auth.store";
+import { useLinkTableStore } from "@/store/app.store";
 
 export const LinkForm = () => {
-    const { setShortUrl, setError, loading, setLoading, shortUrl } = useUrlStore()
-
+    const { setShortUrl, setError, loading, setLoading, shortUrl } = useUrlStore();
+    const {setLoadingTable} = useLinkTableStore();
+    const {userId, setUserID} = useAuthStore();
     const form = useForm<shortenURLFormDef>({
         resolver: zodResolver(shortenURLValidationSchema),
         defaultValues: {
@@ -32,11 +35,21 @@ export const LinkForm = () => {
         setError("");
         setLoading(true);
         try {
-            const userId = "677088ed4b1b61e1808a75f6"; 
+            // const userId = "677088ed4b1b61e1808a75f6"; 
             const longUrl = values.url;
-            const response = await ShortenUrlService.shortenUrl({longUrl});
-            setShortUrl(response.shortUrl);
+            let response;
+            if (localStorage.getItem("userid"))
+            {
+                response = await ShortenUrlService.shortenUrl({longUrl, userId});
+                setShortUrl(response.data.shorturl);
+            }else{
+                response = await ShortenUrlService.shortenUrl({longUrl});
+                setShortUrl(response.shortUrl);
+            }
+            console.log(response);
+            
             form.reset();
+            setLoading(false);
         } catch {
             setError("Error shortening URL:client");
         }
@@ -47,8 +60,24 @@ export const LinkForm = () => {
             description: `Your shortened url is readyyy!🎉. ${shortUrl}`,
           })
           console.log(shortUrl);
-          setLoading(false)
     }, [shortUrl])
+
+    useEffect(() => {
+        const storedUserId = localStorage.getItem("userid");
+        
+        
+        
+        if (storedUserId) {
+            try {
+                setUserID(storedUserId);
+            } catch (error) {
+                console.error("Error parsing userid from localStorage:", error);
+            }
+        } else {
+            setUserID(null); // Optionally handle the absence of a userid
+        }
+        console.log(userId); 
+    }, []);
     return (
         <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="relative text-[#C9CED6] mt-[46px]">

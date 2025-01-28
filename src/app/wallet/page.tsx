@@ -1,5 +1,5 @@
 
-import ConnectWallet from "@/components/ConnectWallet";
+import ConnectWallet from "@/components/auth/ConnectWallet";
 
 export default function page() {
     return (
