@@ -21,7 +21,11 @@ export const Hero = () => {
             <LinkForm />
 
             <ToggleSwitch isEnabled={isEnabled} onToggle={setIsEnabled} label="Auto Paste from Clipboard " />
-            <div className="flex items-center gap-2 justify-center mb-10">
+            {
+                localStorage.getItem("ctn") ? (
+                    <div></div>
+                ) : (
+                    <div className="flex items-center gap-2 justify-center mb-10">
                 <p className="font-light text-[14px] text-[#C9CED6] text-center">You can create <span className="text-[#EB568E] font-bold">05</span> more links. Register  Now to enjoy Unlimited usage</p>
                 <TooltipProvider>
                     <Tooltip>
@@ -34,6 +38,9 @@ export const Hero = () => {
                     </Tooltip>
                 </TooltipProvider>
             </div>
+                )
+            }
+            
         </div>
     );
 }

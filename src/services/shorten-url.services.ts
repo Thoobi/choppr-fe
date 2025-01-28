@@ -3,7 +3,7 @@ import axios from "axios";
 export class ShortenUrlService {
   static BASE_URL = process.env.NEXT_PUBLIC_CHOPPR_BASE_URL as string;
 
-  static async shortenUrl(payload: { longUrl: string; userId?: string }) {
+  static async shortenUrl(payload: { longUrl: string; userId?: string | null }) {
     try {
       const { longUrl, userId } = payload;
       const response = await axios.post(`${this.BASE_URL}/longurl`, 
@@ -18,7 +18,7 @@ export class ShortenUrlService {
 
   static async getUserUrls(){
     try {
-      const response = await axios.get(`${this.BASE_URL}/get-user-url/677088ed4b1b61e1808a75f6`);
+      const response = await axios.get(`${this.BASE_URL}/get-user-url/${localStorage.getItem("userid")}`);
       return response.data;
     } catch (error) {
       console.error("Error getting user URLs:", error);

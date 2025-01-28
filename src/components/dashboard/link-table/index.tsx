@@ -5,6 +5,7 @@ import { Url, columns } from "./columns";
 import { DataTable } from "./data-table";
 import { useLinkTableStore } from "@/store/app.store";
 import { useEffect, useState } from "react";
+import { RefreshCw } from "lucide-react";
 
 async function getData(): Promise<Url[]> {
   try {
@@ -21,25 +22,29 @@ export default function LinkTable() {
   const { loadingTable, setLoadingTable } = useLinkTableStore();
   const [data, setData] = useState<Url[]>([]);
 
+  async function fetchData() {
+    setLoadingTable(true);
+    const fetchedData = await getData();
+    setData(fetchedData);
+    console.log(fetchedData);
+    
+    setLoadingTable(false);
+  }
   useEffect(() => {
-    async function fetchData() {
-      setLoadingTable(true);
-      const fetchedData = await getData();
-      setData(fetchedData);
-      console.log(fetchedData);
-      
-      setLoadingTable(false);
-    }
 
     fetchData();
   }, [setLoadingTable]);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto text-white text-[30px] font-bold py-10">
+      <RefreshCw className={`text-white cursor-pointer mb-4 ${loadingTable ? "animate-spin" : ""}`} onClick={fetchData} />
       {loadingTable ? (
         <div>Loading...</div>
       ) : (
-        <DataTable columns={columns} data={data} />
+        <div className="flex flex-col items-start gap-4 justify-start">
+          
+          <DataTable columns={columns} data={data} />
+        </div>
       )}
     </div>
   );

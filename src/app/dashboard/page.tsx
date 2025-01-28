@@ -1,5 +1,7 @@
+"use client"
+
 import { Hero } from "@/components/dashboard/Hero";
-// import LinkTable from "@/components/dashboard/link-table";
+import LinkTable from "@/components/dashboard/link-table";
 import { Navbar } from "@/components/dashboard/Navbar";
 
 export default function Dashboard() {
@@ -8,7 +10,14 @@ export default function Dashboard() {
             <Navbar />
             <main>
                 <Hero />
-                {/* <LinkTable /> */}
+                {
+                    localStorage.getItem("ctn") ? (
+                        <LinkTable />
+                    ) : (
+                        <p className="text-white text-2xl">signup please</p>
+                    )
+                }
+               
             </main>
         </div>
     );
