@@ -14,7 +14,7 @@ export default function Dashboard() {
                     localStorage.getItem("ctn") ? (
                         <LinkTable />
                     ) : (
-                        <p className="text-white text-2xl">signup please</p>
+                        <></>
                     )
                 }
                
