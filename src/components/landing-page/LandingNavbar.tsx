@@ -7,10 +7,10 @@ const LandingNavbar = () => {
   const [isActive, setIsActive] = useState<string>("Home");
 
   return (
-    <nav className="max-w-full bg-white h-[90px] text-black items-center flex flex-row border-b-[#d6d6d6] border-b-[1px]">
-      <div className="w-[85%] mx-auto flex flex-row justify-between">
+    <nav className="bg-white h-[90px] text-black items-center flex flex-row border-b-[#d6d6d6] border-b-[1px] max-lg:h-[70px] fixed z-30 w-full top-0">
+      <div className="w-[85%] max-lg:w-[90%] mx-auto flex flex-row justify-between items-center">
         <div className="text-4xl font-extrabold text-[#8039DF] max-lg:text-2xl">
-          Logo
+          Choppr
         </div>
         <ul className="flex flex-row w-1/5 justify-between items-center max-lg:hidden">
           {NavLink.map((item) => (
