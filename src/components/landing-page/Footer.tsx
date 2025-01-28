@@ -81,9 +81,9 @@ function Subscription() {
 
 function Legal() {
   return (
-    <div className="flex justify-between items-center flex-wrap gap-4">
+    <div className="flex max-lg:flex-col w-full px-6 justify-between items-center flex-wrap gap-4">
       <p>&copy; Copyright {new Date().getFullYear()}, all rights reserved</p>
-      <div className="flex justify-center gap-4">
+      <div className="flex max-lg:w-full justify-center max-lg:items-center gap-4">
         <a href="#">Terms of service</a>
         <a href="#">Privacy policy</a>
       </div>
